@@ -19,6 +19,7 @@ stages:
     - script: echo "打包后端代码..."
 
 - stage: "deploy"
+  dependsOn: "build"
   displayName: "发布阶段"
   jobs:
   - job: "deployFrontend"
@@ -29,3 +30,12 @@ stages:
     displayName: "发布后端代码"
     steps:
     - script: echo "发布后端代码..."
+
+- stage: "test"
+  dependsOn: "build"
+  displayName: "测试阶段"
+  jobs:
+  - job: "testApi"
+    displayName: "测试接口"
+    steps:
+    - script: echo "测试接口..."
